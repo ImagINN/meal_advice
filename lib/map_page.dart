@@ -3,35 +3,30 @@ import 'package:meal_advice/question_page.dart';
 import 'package:meal_advice/welcome_page.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+  const MapPage({super.key});
 
   @override
   State<MapPage> createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-  late Widget currentPage;
+  String? pageName; // changed from 'question_page'
+  Widget? currentPage;
 
-  @override
-  void initState() {
-    currentPage = WelcomePage(changeCurrentPage);
-    super.initState();
-  }
-
-  void changeCurrentPage(String pageName) {
+  void changeCurrentPage() {
     setState(() {
-      switch (pageName) {
-        case 'question_page':
-          currentPage = const QuestionPage();
-          break;
-        default:
-      }
+      pageName = 'question_page'; // changed from 'question_page'
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(context) {
+    currentPage = WelcomePage(changeCurrentPage);
+    if (pageName == 'question_page') {
+      currentPage = QuestionPage();
+    }
+    return MaterialApp(
+        home: Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -46,6 +41,6 @@ class _MapPageState extends State<MapPage> {
         ),
         child: currentPage,
       ),
-    );
+    ));
   }
 }
