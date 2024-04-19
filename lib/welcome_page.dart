@@ -1,46 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:meal_advice/question_page.dart';
 
 class WelcomePage extends StatelessWidget {
-  final Function() changeCurrentPage;
+  const WelcomePage({
+    required this.changeCurrentPage,
+    super.key,
+  });
 
-  const WelcomePage(this.changeCurrentPage, {super.key});
+  final Function(String requestedPageName) changeCurrentPage;
 
   @override
   Widget build(BuildContext context) {
-    // AppBar appBar = AppBar(
-    //   title: const Text(
-    //     'Welcome',
-    //     style: TextStyle(
-    //       color: Color.fromARGB(255, 255, 255, 255),
-    //       fontSize: 24,
-    //     ),
-    //   ),
-    //   backgroundColor: Colors.transparent,
-    //   flexibleSpace: Container(
-    //     decoration: const BoxDecoration(
-    //       gradient: LinearGradient(
-    //         colors: [
-    //           Color.fromARGB(255, 6, 52, 10),
-    //           Color.fromARGB(255, 40, 116, 40),
-    //           Color.fromRGBO(0, 0, 0, 1),
-    //         ],
-    //         begin: Alignment.bottomLeft,
-    //         end: Alignment.topRight,
-    //       ),
-    //     ),
-    //   ),
-    // );
     return Scaffold(
-      // appBar: appBar,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color.fromARGB(255, 6, 52, 10),
-              Color.fromARGB(255, 40, 116, 40),
-              Color.fromRGBO(0, 0, 0, 1),
+              Color.fromARGB(255, 17, 92, 20),
+              Color.fromARGB(255, 47, 87, 49),
+              Color.fromARGB(255, 3, 31, 4),
             ],
           ),
         ),
@@ -56,31 +36,49 @@ class WelcomePage extends StatelessWidget {
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 32,
-                fontStyle: FontStyle.italic,
+                fontStyle: FontStyle.normal,
                 decoration: TextDecoration.none,
               ),
+              textAlign: TextAlign.center,
+              softWrap: true,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 60),
             OutlinedButton.icon(
-                onPressed: changeCurrentPage,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Color.fromRGBO(255, 255, 255, 1),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(7))),
-                  side: const BorderSide(
-                      color: Color.fromARGB(35, 255, 255, 255)),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                ),
-                icon: const Text(
-                  'Get Started',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuestionPage(
+                      changeCurrentPage: changeCurrentPage,
+                    ),
                   ),
+                );
+              },
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Color.fromARGB(255, 1, 58, 3),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(42)),
                 ),
-                label: Image.asset('assets/images/cooking.png', width: 32)),
+                side: const BorderSide(
+                  color: Color.fromRGBO(4, 46, 10, 1),
+                  width: 2,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              ),
+              icon: const Text(
+                'Get Started',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              label: Image.asset(
+                'assets/images/cooking.png',
+                width: 32,
+              ),
+            ),
           ]),
         ),
       ),

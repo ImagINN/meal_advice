@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:meal_advice/welcome_page.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({super.key});
+  const QuestionPage({
+    required this.changeCurrentPage,
+    super.key,
+  });
+
+  final Function(String requestedPageName) changeCurrentPage;
 
   @override
   State<QuestionPage> createState() {
@@ -30,27 +32,20 @@ class _QuestionPageState extends State<QuestionPage> {
       title: const Text(
         'Question Page',
         style: TextStyle(
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: Colors.white,
           fontSize: 24,
         ),
       ),
-      leading: Container(
-        margin: EdgeInsets.only(left: 16.0), // Sol taraftan 16 birimlik margin
-        child: IconButton(
-          icon: Image.asset('assets/images/back-button.png', width: 30),
-          tooltip: 'Go back',
-          color: Color.fromARGB(255, 255, 255, 255),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute<void>(builder: (BuildContext context) {
-              return Scaffold(
-                body: WelcomePage(() {}),
-              );
-            }));
-          },
+      backgroundColor: Color.fromARGB(232, 1, 42, 8),
+      leading: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_ios_new,
+          color: Colors.white,
         ),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
-      backgroundColor: Color.fromARGB(255, 6, 52, 10),
     );
     return Scaffold(
       appBar: appBar,
